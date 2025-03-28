@@ -102,9 +102,18 @@ body {
   }
 
   h1 {
-    font-size: 22px;
+    font-size: 24px;
     margin-bottom: 20px;
     color: #333;
+    word-break: keep-all;
+    text-align: center;
+  }
+  
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 20px;
+      padding: 0 10px;
+    }
   }
   
   #flag-image {
