@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>국기 맞추기 게임</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 시작 화면 -->
+  <div id="start-screen" class="orbit-container">
+    <div class="planet"></div>
+    <div class="orbit" id="orbit"></div>
+    <h1 id="start-title">국기 맞추기 게임</h1> <!-- 추가된 부분 -->
+    <button id="start-btn" class="start-button">게임 시작하기</button>
+  </div>
+
+  <!-- 게임 화면 -->
+  <div id="game-screen" class="container" style="display: none; text-align: center;">
+    <h1>국기 맞추기 게임</h1>
+    <img id="flag-image" src="" alt="국기 이미지" />
+    <p id="question" class="question">이 국기는 어느 나라일까요?</p>
+    <div class="input-wrapper">
+      <input id="answer-input" type="text" placeholder="나라 이름을 입력하세요" />
+      <button id="submit-btn">정답 확인</button>
+    </div>
+    <!-- ✅ 여기에 정답/오답 카운트 표시 -->
+    <p id="feedback"></p>
+    <div class="score-container">
+      <div class="score-box">맞춘 문제: <span id="correct-count">0</span></div>
+      <div class="score-box">틀린 문제: <span id="wrong-count">0</span></div>
+    </div>
+  </div>
+
+  <!-- 게임 종료 후 버튼들 -->
+  <div id="end-buttons">
+    <button id="retry-btn" class="end-button">다시 하기</button>
+    <button id="incorrect-btn" class="end-button">틀린 문제 보기</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
