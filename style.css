@@ -101,24 +101,45 @@ body {
 
 /* 게임 화면 */
 .container {
-  max-width: 400px;
-  width: 90%;
-  margin: 40px auto;
-  padding: 20px;
+  width: 25% ;                  /* 화면 너비의 70%로 줄이기 */
+  height: 65% !important;                /* 화면 높이의 60%로 줄이기 */
+  padding: 5px;               /* 여백을 줄이기 */
   background-color: white;
   border-radius: 20px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
+
+  /* 화면 가운데 배치 */
+  position: absolute;          /* 부모 화면에 대해 절대적으로 위치 지정 */
+  top: 50%;                    /* 화면의 세로 중간 */
+  left: 50%;                   /* 화면의 가로 중간 */
+  transform: translate(-50%, -50%); /* 정확히 중앙에 배치 */
 }
 
+/* 기본 설정 */
+#start-title {
+  font-size: 4vw; /* 화면 너비에 비례해서 폰트 크기 설정 */
+  padding: 10px 10px;
+  text-align: center;
+  color: #2b6edc;
+  margin: 0;
+  word-break: break-word;
+  white-space: nowrap;  /* 텍스트가 한 줄로 유지되도록 설정 */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0);
+  background-position: center;
+  z-index: 1000;
+  margin-top: -40vh;
+  width: 100%; /* 너비를 100%로 설정하여 가로로 늘어나게 함 */
+}
 /* 반응형 설정 */
 @media (max-width: 767px) {
   #start-title {
-    font-size: 1rem;  /* 화면 너비가 767px 이하일 경우, 폰트 크기를 24px로 설정 */
-    margin-top: -30vh;  /* 화면 크기에 맞춰 상단 여백도 수정 */
+    font-size: 24px;  /* 화면 너비가 767px 이하일 경우, 폰트 크기를 24px로 설정 */
   }
   .container {
     max-width: 90vw;          /* 화면 너비의 90% */
@@ -145,24 +166,6 @@ body {
   }
 }
 
-/* 기본 설정 */
-#start-title {
-  font-size: 3rem; /* 글자 크기를 화면 너비의 5%로 설정 */
-  padding: 10px 10px; /* padding을 화면 크기에 비례하도록 설정 */
-  text-align: center;
-  color: #2b6edc;
-  margin: 0; /* 마진을 0으로 설정 */
-  word-break: break-word;
-  white-space: normal;
-  position: fixed;
-  top: 50%; /* 화면의 세로 중간 */
-  left: 50%; /* 화면의 가로 중간 */
-  transform: translate(-50%, -50%); /* 요소의 중심을 기준으로 정확히 중앙에 위치시키기 위한 보정 */
-  background-color: rgba(255, 255, 255, 0);
-  background-position: center;
-  z-index: 1000;
-  margin-top: -40vh; /* 상단 여백을 화면 높이의 10% 만큼 추가하여 위로 이동 */
-}
 
 h2 {
   font-size: 24px;
@@ -174,7 +177,7 @@ h2 {
 }
 
 #flag-image {
-  width: 100%;
+  width: 60%;
   height: auto;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -237,7 +240,7 @@ h2 {
 
 /* 게임 종료 후 버튼 스타일 */
 #end-buttons {
-  margin-top: 1vh;
+  margin-top: 12px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -329,3 +332,4 @@ h2 {
   font-size: 16px;
   text-align: center;
 }
+
