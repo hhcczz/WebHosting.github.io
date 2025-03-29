@@ -6,31 +6,60 @@ const flagCodes = [
 ];
 
 const orbit = document.getElementById("orbit");
-const radius = 200;
 
-flagCodes.forEach((code, index) => {
-  const angle = (2 * Math.PI / flagCodes.length) * index;
+// 반응형으로 크기와 반지름을 조정하기 위한 함수
+const adjustOrbitSize = () => {
+  const windowWidth = window.innerWidth;
+  const windowHeight = window.innerHeight;
 
-  const flagEl = document.createElement("div");
-  flagEl.className = "flag";
+  // 궤도의 반지름을 화면 크기 비율에 맞게 조정 (최소 150px, 최대 300px)
+  const radius = Math.min(windowWidth, windowHeight) * 0.3;  // 화면 너비/높이에 비례하여 반지름 설정
 
-  const img = document.createElement("img");
-  img.src = `https://flagcdn.com/w320/${code}.png`;  // ✅ API 경로로 수정
-  img.alt = code.toUpperCase();
+  // 기존에 있는 flag 요소들을 모두 제거
+  orbit.innerHTML = "";
 
-  flagEl.appendChild(img);
+  // flagCodes 배열을 기반으로 회전하는 국기들 추가
+  flagCodes.forEach((code, index) => {
+    const angle = (2 * Math.PI / flagCodes.length) * index;
 
-  // ✅ 중심 기준 + 회전 반지름 위치 적용
-  const x = Math.cos(angle) * radius;
-  const y = Math.sin(angle) * radius;
-  flagEl.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
+    const flagEl = document.createElement("div");
+    flagEl.className = "flag";
 
-  orbit.appendChild(flagEl);
-});
+    const img = document.createElement("img");
+    img.src = `https://flagcdn.com/w320/${code}.png`; // API 경로
+    img.alt = code.toUpperCase();
+
+    flagEl.appendChild(img);
+
+    // 회전할 각도와 함께 국기 위치 조정
+    const x = Math.cos(angle) * radius;
+    const y = Math.sin(angle) * radius;
+    flagEl.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
+
+    orbit.appendChild(flagEl);
+
+    // 반응형 크기 조정
+    const flagSize = Math.min(50, radius / 5);  // 반지름에 비례하여 국기 크기 조정
+    img.style.width = `${flagSize}px`;  // 국기 크기 설정
+    img.style.height = `${flagSize}px`; // 국기 크기 설정
+
+    // 국기를 원 모양으로 만들기
+    flagEl.style.width = `${flagSize}px`;
+    flagEl.style.height = `${flagSize}px`;
+    flagEl.style.borderRadius = "50%";  // 원형으로 만들기
+    flagEl.style.overflow = "hidden";   // 국기 이미지를 원에 맞게 잘라내기
+  });
+};
+
+// 화면 크기가 변경될 때마다 호출
+window.addEventListener('resize', adjustOrbitSize);
+
+// 최초 실행
+adjustOrbitSize();
 
 const countries = [
   { code: "kr", name: "대한민국" },
-  { code: "jp", name: "일본" },
+  //{ code: "jp", name: "일본" },
   //{ code: "us", name: "미국" },
   //{ code: "fr", name: "프랑스" },
   //{ code: "de", name: "독일" },
@@ -213,6 +242,7 @@ window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("start-btn").addEventListener("click", () => {
     // 시작 화면 숨기고 게임 화면 보이기
     document.getElementById("start-screen").style.display = "none";
+    document.getElementById("start-title").style.display = "none";
     document.getElementById("game-screen").style.display = "block";
     document.getElementById("end-buttons").style.display = "none";
 
