@@ -5,8 +5,9 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden; /* ❌ 옆으로 스크롤 안 보이게 */
-  overflow-y: auto; /* 🔥 세로 스크롤 허용 */
+  overflow-y: auto;   /* 🔥 세로 스크롤 허용 */
 }
+
 /* 시작 화면 전체 */
 .orbit-container {
   position: relative;
@@ -92,8 +93,8 @@ body {
 
 /* 게임 화면 */
 .container {
-  max-width: 400px;        /* ✅ 너비 제한 (중앙 정렬용) */
-  width: 90%;              /* ✅ 모바일 대응 */
+  max-width: 400px;
+  width: 90%;               /* 모바일 대응 */
   margin: 40px auto;
   padding: 20px;
   background-color: white;
@@ -107,15 +108,43 @@ body {
 
 @media (max-width: 480px) {
   .container {
-    width: 95%;
-    padding: 16px;
-    margin: 20px auto;
-    border-radius: 12px;
+    width: 90%;                /* 모바일에서는 너비를 상대적으로 90%로 줄이기 */
+    padding: 15px;             /* 여백도 적당히 줄여서 공간 확보 */
+    margin: 20px auto;         /* 상하 여백 조정 */
+  }
+
+  h1 {
+    font-size: 22px;           /* 모바일에서는 글자 크기 줄이기 */
+    max-width: 90%;
+    margin: 0;
+    top: 20px;                 /* 모바일에서는 위쪽 여백을 좀 더 줄여줌 */
+  }
+
+  h2 {
+    font-size: 18px;
+    max-width: 90%;
+    margin: 12px auto;
+    line-height: 1.4;
+    white-space: normal;       /* 모바일에서 줄바꿈 허용 */
   }
 
   #flag-image {
     width: 100%;
     height: auto;
+  }
+
+  .input-wrapper {
+    width: 100%;               /* 입력창과 버튼이 꽉 차게 보이도록 */
+    margin-top: 10px;           /* 위 여백 주기 */
+  }
+
+  input, button {
+    width: 100%;               /* 버튼과 입력창이 부모 div를 꽉 채우도록 */
+    font-size: 16px;            /* 글자 크기 조정 */
+  }
+
+  button {
+    padding: 10px;
   }
 }
 
@@ -124,19 +153,13 @@ h1 {
   padding: 10px;
   text-align: center;
   color: #2b6edc;
-  margin: 0;
-  word-break: keep-all;
-  white-space: nowrap;
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: 22px;
-    max-width: 90%;
-    margin: 20px auto;
-    line-height: 1.2;
-    white-space: normal; /* 모바일에선 줄바꿈 허용 */
-  }
+  margin: 0;                  /* 기존 여백을 없애서 맨 위에 고정 */
+  word-break: break-word;     /* 긴 글자가 넘칠 때 줄바꿈 */
+  white-space: normal;
+  position: absolute;         /* 화면 상단에 위치하도록 */
+  top: 40px;                  /* 위에서부터 40px 정도 떨어지게 설정 */
+  left: 50%;
+  transform: translateX(-50%); /* 가운데 정렬 */
 }
 
 h2 {
@@ -146,16 +169,6 @@ h2 {
   color: #000; /* 원하는 색상 */
   word-break: keep-all;
   white-space: nowrap;
-}
-
-@media (max-width: 480px) {
-  h2 {
-    font-size: 18px;
-    max-width: 90%;
-    margin: 12px auto;
-    line-height: 1.4;
-    white-space: normal; /* 모바일에서 줄바꿈 허용 */
-  }
 }
 
 #flag-image {
@@ -173,9 +186,9 @@ h2 {
 
 .input-wrapper {
   display: flex;
-  flex-direction: column;   /* ✅ 세로 방향 정렬 */
-  align-items: center;      /* ✅ 가운데 정렬 */
-  gap: 12px;                /* ✅ 입력창과 버튼 사이 간격 */
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 16px;
 }
 
@@ -215,7 +228,7 @@ h2 {
 }
 
 #feedback {
-  height: 24px;         /* ✅ 항상 이만큼 공간 확보 */
+  height: 24px;
   margin-top: 12px;
   font-weight: bold;
   display: flex;
@@ -223,51 +236,37 @@ h2 {
   align-items: center;
 }
 
-/* 시작 화면 */
-#start-title {
-    position: absolute;
-    top: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 48px; /* 큰 폰트 크기 */
-    font-weight: bold; /* 굵은 텍스트 */
-    color: #2b6edc; /* 파란색 텍스트 */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 효과 */
-    letter-spacing: 2px; /* 글자 사이 간격 조절 */
-    font-family: 'Segoe UI', sans-serif; /* 현대적인 폰트 */
-    margin-bottom: 30px; /* 아래쪽 여백 */
-}
-
 /* 게임 종료 후 버튼 스타일 */
 #end-buttons {
-    margin-top: 20px;
-    text-align: center;
-    display: none;
-  }
-  
-  .end-button {
-    padding: 12px 30px;
-    font-size: 16px;
-    background: linear-gradient(135deg, #4f9deb, #2b6edc);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 10px;
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
-    transition: all 0.2s ease-in-out;
-  }
-  
-  .end-button:hover {
-    background: linear-gradient(135deg, #2b6edc, #1a4fbf);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(0, 123, 255, 0.3);
-  }
+  margin-top: 20px;
+  text-align: center;
+  display: none;
+}
 
+.end-button {
+  padding: 12px 30px;
+  font-size: 16px;
+  background: linear-gradient(135deg, #4f9deb, #2b6edc);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 10px;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.end-button:hover {
+  background: linear-gradient(135deg, #2b6edc, #1a4fbf);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 123, 255, 0.3);
+}
+
+/* 점수 영역 */
 .score-container {
   display: flex;
-  justify-content: center; /* ✅ 중앙 정렬 */
-  gap: 16px;                /* ✅ 박스 사이 간격 */
+  justify-content: center;
+  gap: 16px;
   margin-top: 20px;
 }
 
@@ -281,8 +280,9 @@ h2 {
   text-align: center;
 }
 
+/* 카운트다운 */
 #countdown-bar {
-  display: flex;            /* 🔥 무조건 가로로 박아 */
+  display: flex;
   flex-direction: row !important;
   justify-content: center;
   align-items: center;
@@ -296,9 +296,10 @@ h2 {
   background-color: #90ee90;
   border-radius: 8px;
   transition: background-color 0.3s ease;
-  display: inline-block; /* 🔒 세로 영향 차단 */
+  display: inline-block;
 }
 
+/* 틀린 문제 보기 */
 #wrong-questions {
   max-width: 400px;
   margin: 20px auto;
@@ -314,7 +315,7 @@ h2 {
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #fffdf5;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .wrong-item img {
