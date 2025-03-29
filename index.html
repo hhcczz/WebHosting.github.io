@@ -17,7 +17,14 @@
 
   <!-- 게임 화면 -->
   <div id="game-screen" class="container" style="display: none; text-align: center;">
-    <h1>🌍 국기 맞추기 게임</h1>
+    <div id="countdown-bar">
+      <div class="count-block"></div>
+      <div class="count-block"></div>
+      <div class="count-block"></div>
+      <div class="count-block"></div>
+      <div class="count-block"></div>
+    </div>
+    <h2>🌍 국기 맞추기 게임</h2>
     <img id="flag-image" src="" alt="국기 이미지" />
     <p id="question" class="question">이 국기는 어느 나라일까요?</p>
     <div class="input-wrapper">
@@ -37,6 +44,8 @@
     <button id="retry-btn" class="end-button">다시 하기</button>
     <button id="incorrect-btn" class="end-button">틀린 문제 보기</button>
   </div>
+
+  <div id="wrong-questions" style="display: none; margin-top: 20px;"></div>
 
   <script src="script.js"></script>
 </body>
