@@ -2,6 +2,7 @@
 body {
   background-color: #ffffff;
   font-family: 'Segoe UI', sans-serif;
+  max-width: 720px;
   margin: 0;
   padding: 0;
   overflow-x: hidden; /* ❌ 옆으로 스크롤 안 보이게 */
@@ -11,12 +12,15 @@ body {
 /* 시작 화면 전체 */
 .orbit-container {
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;  /* 화면 너비 */
+  height: 100vh;  /* 화면 높이 */
+  max-width: 100vw; /* 최대 너비를 화면 너비로 제한 */
+  max-height: 100vh; /* 최대 높이를 화면 높이로 제한 */
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column; /* 요소들을 수직으로 배치 */
+  box-sizing: border-box;
 }
 
 /* 중앙 지구 이미지 */
@@ -96,7 +100,7 @@ body {
 /* 게임 화면 */
 .container {
   max-width: 400px;
-  width: 90%;               /* 모바일 대응 */
+  width: 90%;
   margin: 40px auto;
   padding: 20px;
   background-color: white;
@@ -119,8 +123,6 @@ body {
   .container {
     max-width: 90vw;          /* 화면 너비의 90% */
     width: 90vw;              /* 화면 너비의 90% */
-    padding: 8vw 6vw;         /* 더 작은 화면에서 패딩 비율을 크게 조정 */
-    margin: 8vh auto;         /* 화면 높이에 비례한 여백 설정 */
   }
   /* planet을 반응형으로 설정 */
   .planet {
