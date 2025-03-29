@@ -16,19 +16,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column; /* 요소들을 수직으로 배치 */
 }
 
 /* 중앙 지구 이미지 */
 .planet {
   position: absolute;
-  width: 240px;
-  height: 240px;
+  width: 20vw;   /* 화면 너비의 20%로 설정 */
+  height: 20vw;   /* 화면 너비의 20%로 설정 (width와 height를 동일하게 설정하여 원 모양 유지) */
   background-image: url("https://openmoji.org/data/color/svg/1F30E.svg");
   background-size: cover;
   background-position: center;
-  border-radius: 25%;
+  border-radius: 50%;   /* 원 모양으로 설정 */
   z-index: 1;
 }
+
 
 /* 회전 궤도 */
 .orbit {
@@ -106,61 +108,58 @@ body {
   box-sizing: border-box;
 }
 
-@media (max-width: 480px) {
+/* 반응형 설정 */
+@media (max-width: 767px) {
+  #start-title {
+    font-size: 36px; /* 글자 크기를 화면 너비의 6%로 설정 */
+    top: 12px; /* 화면 높이에 비례하여 상단 여백 조정 */
+    padding: 5px 5px; /* padding을 화면 크기에 맞게 설정 */
+  }
+
   .container {
-    width: 90%;                /* 모바일에서는 너비를 상대적으로 90%로 줄이기 */
-    padding: 15px;             /* 여백도 적당히 줄여서 공간 확보 */
-    margin: 20px auto;         /* 상하 여백 조정 */
+    max-width: 90vw;          /* 화면 너비의 90% */
+    width: 90vw;              /* 화면 너비의 90% */
+    padding: 8vw 6vw;         /* 더 작은 화면에서 패딩 비율을 크게 조정 */
+    margin: 8vh auto;         /* 화면 높이에 비례한 여백 설정 */
+  }
+  /* planet을 반응형으로 설정 */
+  .planet {
+    width: 30%;                /* 화면 크기의 30%로 설정 */
+    height: auto;              /* 높이는 자동으로 비율에 맞게 조정 */
+    padding-top: 30%;          /* 너비의 30%에 해당하는 높이로 비율 유지 */
+    background-size: cover;   /* 배경 이미지를 원에 맞게 커버 */
   }
 
-  h1 {
-    font-size: 22px;           /* 모바일에서는 글자 크기 줄이기 */
-    max-width: 90%;
-    margin: 0;
-    top: 20px;                 /* 모바일에서는 위쪽 여백을 좀 더 줄여줌 */
+  .start-button {
+    font-size: 1rem;
+    padding: 6px 12px;
   }
 
-  h2 {
-    font-size: 18px;
-    max-width: 90%;
-    margin: 12px auto;
-    line-height: 1.4;
-    white-space: normal;       /* 모바일에서 줄바꿈 허용 */
-  }
-
-  #flag-image {
-    width: 100%;
-    height: auto;
-  }
-
-  .input-wrapper {
-    width: 100%;               /* 입력창과 버튼이 꽉 차게 보이도록 */
-    margin-top: 10px;           /* 위 여백 주기 */
-  }
-
-  input, button {
-    width: 100%;               /* 버튼과 입력창이 부모 div를 꽉 채우도록 */
-    font-size: 16px;            /* 글자 크기 조정 */
-  }
-
-  button {
-    padding: 10px;
+  #end-button {
+    font-size: 5vw;            /* 화면 너비에 맞춰 글자 크기도 더 키워줍니다 */
+    border-radius: 3vh;        /* 더 작은 화면에서 둥근 모서리를 더 크게 조정 */
+    width: 50%;
+    height: 50%;
   }
 }
 
-h1 {
-  font-size: 36px;
-  padding: 10px;
+/* 기본 설정 */
+#start-title {
+  font-size: 2vw; /* 글자 크기를 화면 너비의 5%로 설정 */
+  padding: 1vh 0vw; /* padding을 화면 크기에 비례하도록 설정 */
   text-align: center;
   color: #2b6edc;
-  margin: 0;                  /* 기존 여백을 없애서 맨 위에 고정 */
-  word-break: break-word;     /* 긴 글자가 넘칠 때 줄바꿈 */
+  margin: 0; /* 마진을 0으로 설정 */
+  word-break: break-word;
   white-space: normal;
-  position: absolute;         /* 화면 상단에 위치하도록 */
-  top: 40px;                  /* 위에서부터 40px 정도 떨어지게 설정 */
-  left: 50%;
-  transform: translateX(-50%); /* 가운데 정렬 */
+  position: fixed;
+  top: 5vh; /* 상단 여백을 화면 높이의 5%로 설정 */
+  left: 50%; /* 화면 가로 중앙 */
+  transform: translateX(-50%); /* 가로 중앙 정렬 */
+  background-color: rgb(255, 255, 255);
+  z-index: 1000;
 }
+
 
 h2 {
   font-size: 24px;
@@ -201,15 +200,12 @@ h2 {
   padding: 10px 16px;
   box-sizing: border-box;
 }
-
-@media (max-width: 480px) {
-  #answer-input,
-  #submit-btn {
-    width: 100%;
+@keyframes orbit-animation {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
   }
-
-  #submit-btn {
-    margin-top: 10px; /* 버튼이 input 아래로 내려올 경우 간격 */
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
@@ -238,46 +234,30 @@ h2 {
 
 /* 게임 종료 후 버튼 스타일 */
 #end-buttons {
-  margin-top: 20px;
+  margin-top: 1vh;
   text-align: center;
-  display: none;
+  display: flex;
+  justify-content: center;
+  gap: 2vw; /* 버튼들 간 간격을 화면 너비에 비례해서 설정 */
 }
 
 .end-button {
-  padding: 12px 30px;
-  font-size: 16px;
-  background: linear-gradient(135deg, #4f9deb, #2b6edc);
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  background-color: #3f51b5;
   color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin: 10px;
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
-  transition: all 0.2s ease-in-out;
+  min-width: 10px;           /* 최소 너비 설정 */
+  min-height: 10px;           /* 최소 높이 설정 */
+  width: auto;                /* 버튼 너비를 자동으로 조정 */
+  height: auto;               /* 버튼 높이를 자동으로 조정 */
+  border: 2px solid #ffffff;  /* 회색 외곽선 (두께 2px, 색상 #808080) */
 }
 
 .end-button:hover {
   background: linear-gradient(135deg, #2b6edc, #1a4fbf);
   transform: translateY(-2px);
   box-shadow: 0 6px 14px rgba(0, 123, 255, 0.3);
-}
-
-/* 점수 영역 */
-.score-container {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 20px;
-}
-
-.score-box {
-  padding: 10px 20px;
-  border-radius: 8px;
-  background-color: #f5f5f5;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  font-weight: bold;
-  font-size: 16px;
-  text-align: center;
 }
 
 /* 카운트다운 */
@@ -327,4 +307,22 @@ h2 {
 .wrong-text {
   font-size: 14px;
   line-height: 1.4;
+}
+
+/* 점수 영역 */
+.score-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.score-box {
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
 }
