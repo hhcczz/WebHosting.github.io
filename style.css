@@ -1,178 +1,230 @@
 /* 기본 설정 */
 body {
-    background-color: #ffffff;
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-  
-  /* 시작 화면 전체 */
-  .orbit-container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* 중앙 지구 이미지 */
-  .planet {
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    background-image: url("assets/flag-world.png");
-    background-size: cover;
-    background-position: center;
-    border-radius: 50%;
-    z-index: 1;
-  }
-  
-  /* 회전 궤도 */
-  .orbit {
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: rotate 20s linear infinite; /* ⬅️ 여기서 원 회전 */
-  }
+  background-color: #ffffff;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* ❌ 옆으로 스크롤 안 보이게 */
+  overflow-y: auto; /* 🔥 세로 스크롤 허용 */
+}
+/* 시작 화면 전체 */
+.orbit-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  @keyframes rotate {
-    0%   { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
-  }
-  
-  /* 각 국기 */
-  .flag {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* 위치 유지 */
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid white;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  }
-  
-  .flag img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    pointer-events: none;
-  }
-  
-  /* 게임 시작 버튼 */
-  .start-button {
-    position: absolute;
-    bottom: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 25px;
-    font-size: 16px;
-    background: linear-gradient(135deg, #4f9deb, #2b6edc);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
-  }
-  
-  .start-button:hover {
-    background: linear-gradient(135deg, #2b6edc, #1a4fbf);
-    transform: translateX(-50%) translateY(-2px);
-    box-shadow: 0 6px 14px rgba(0, 123, 255, 0.3);
-  }
-  
-  /* 게임 화면 */
+/* 중앙 지구 이미지 */
+.planet {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  background-image: url("https://openmoji.org/data/color/svg/1F30E.svg");
+  background-size: cover;
+  background-position: center;
+  border-radius: 25%;
+  z-index: 1;
+}
+
+/* 회전 궤도 */
+.orbit {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: rotate 20s linear infinite; /* ⬅️ 여기서 원 회전 */
+}
+
+@keyframes rotate {
+  0%   { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* 각 국기 */
+.flag {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 위치 유지 */
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.flag img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* 게임 시작 버튼 */
+.start-button {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 25px;
+  font-size: 16px;
+  background: linear-gradient(135deg, #4f9deb, #2b6edc);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
+.start-button:hover {
+  background: linear-gradient(135deg, #2b6edc, #1a4fbf);
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 123, 255, 0.3);
+}
+
+/* 게임 화면 */
+.container {
+  max-width: 400px;        /* ✅ 너비 제한 (중앙 정렬용) */
+  width: 90%;              /* ✅ 모바일 대응 */
+  margin: 40px auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
   .container {
-    background-color: white;
-    padding: 30px 30px 10px 30px;  /* ← 하단 패딩만 줄이기 */
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 300px;
-    margin: 90px auto;  /* ← 여기도 상단 간격만 남기고 줄여도 좋아 */
+    width: 95%;
+    padding: 16px;
+    margin: 20px auto;
+    border-radius: 12px;
   }
 
-  h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-    word-break: keep-all;
-    text-align: center;
-  }
-  
-  @media (max-width: 480px) {
-    h1 {
-      font-size: 20px;
-      padding: 0 10px;
-    }
-  }
-  
   #flag-image {
     width: 100%;
     height: auto;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 15px;
   }
-  
-  .question {
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .input-wrapper {
-    display: flex;
-    flex-direction: column;   /* ✅ 세로 방향 정렬 */
-    align-items: center;      /* ✅ 가운데 정렬 */
-    gap: 12px;                /* ✅ 입력창과 버튼 사이 간격 */
-    margin-bottom: 16px;
-  }
-  
-  #answer-input {
-    font-size: 16px;
-    border: 1px solid #bbb;
-    border-radius: 6px;
-    text-align: center;
-    width: 240px;
-    padding: 10px 16px;
-    box-sizing: border-box;
-  }
+}
 
-  
+h1 {
+  font-size: 36px;
+  padding: 10px;
+  text-align: center;
+  color: #2b6edc;
+  margin: 0;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 22px;
+    max-width: 90%;
+    margin: 20px auto;
+    line-height: 1.2;
+    white-space: normal; /* 모바일에선 줄바꿈 허용 */
+  }
+}
+
+h2 {
+  font-size: 24px;
+  text-align: center;
+  margin: 16px 0;
+  color: #000; /* 원하는 색상 */
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 18px;
+    max-width: 90%;
+    margin: 12px auto;
+    line-height: 1.4;
+    white-space: normal; /* 모바일에서 줄바꿈 허용 */
+  }
+}
+
+#flag-image {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.question {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;   /* ✅ 세로 방향 정렬 */
+  align-items: center;      /* ✅ 가운데 정렬 */
+  gap: 12px;                /* ✅ 입력창과 버튼 사이 간격 */
+  margin-bottom: 16px;
+}
+
+#answer-input {
+  font-size: 16px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  text-align: center;
+  width: 240px;
+  padding: 10px 16px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+  #answer-input,
   #submit-btn {
-    padding: 10px 20px;
-    font-size: 14px;
-    background-color: #3f51b5;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  #submit-btn:hover {
-    background-color: #303f9f;
-  }
-  
-  #feedback {
-    height: 24px;         /* ✅ 항상 이만큼 공간 확보 */
-    margin-top: 12px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
   }
 
-  /* 시작 화면 */
-  #start-title {
+  #submit-btn {
+    margin-top: 10px; /* 버튼이 input 아래로 내려올 경우 간격 */
+  }
+}
+
+#submit-btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#submit-btn:hover {
+  background-color: #303f9f;
+}
+
+#feedback {
+  height: 24px;         /* ✅ 항상 이만큼 공간 확보 */
+  margin-top: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 시작 화면 */
+#start-title {
     position: absolute;
     top: 40px;
     left: 50%;
@@ -228,4 +280,50 @@ body {
   font-size: 16px;
   text-align: center;
 }
-  
+
+#countdown-bar {
+  display: flex;            /* 🔥 무조건 가로로 박아 */
+  flex-direction: row !important;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.count-block {
+  width: 40px;
+  height: 25px;
+  background-color: #90ee90;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  display: inline-block; /* 🔒 세로 영향 차단 */
+}
+
+#wrong-questions {
+  max-width: 400px;
+  margin: 20px auto;
+  text-align: left;
+}
+
+.wrong-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fffdf5;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.wrong-item img {
+  width: 40px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.wrong-text {
+  font-size: 14px;
+  line-height: 1.4;
+}
