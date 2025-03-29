@@ -20,6 +20,7 @@ flagCodes.forEach((code, index) => {
 
   flagEl.appendChild(img);
 
+  // ✅ 중심 기준 + 회전 반지름 위치 적용
   const x = Math.cos(angle) * radius;
   const y = Math.sin(angle) * radius;
   flagEl.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
@@ -27,20 +28,20 @@ flagCodes.forEach((code, index) => {
   orbit.appendChild(flagEl);
 });
 
-
 const countries = [
   { code: "kr", name: "대한민국" },
   { code: "jp", name: "일본" },
-  { code: "us", name: "미국" },
-  { code: "fr", name: "프랑스" },
-  { code: "de", name: "독일" },
-  { code: "it", name: "이탈리아" }
+  //{ code: "us", name: "미국" },
+  //{ code: "fr", name: "프랑스" },
+  //{ code: "de", name: "독일" },
+  //{ code: "it", name: "이탈리아" }
 ];
 
 let currentCode = null;
 let currentIndex = 0;
 let randomIndex = 0;
 let usedCountryCodes = [];
+const wrongAnswers = []; // 틀릴 때마다 여기에 저장
 let totalQuestions = Object.keys(countries).length;
 let answeredQuestions = 0; // 답한 문제 수
 
@@ -56,10 +57,12 @@ function loadNextFlag() {
     document.getElementById("answer-input").style.display = "none";
     document.getElementById("submit-btn").style.display = "none";
     document.getElementById("feedback").style.display = "none";
+    document.getElementById("countdown-bar").style.display = "none";
     document.getElementById("end-buttons").style.display = "block";
+
     return;
   }
-
+  
   // 중복된 국가가 나오면 다시 뽑기
   while (true) {
     randomIndex = Math.floor(Math.random() * countries.length);
@@ -69,7 +72,7 @@ function loadNextFlag() {
       break;
     }
   }
-  
+  startCountdown(); // 호출해서 시작!
   // 중복이 아니면 저장
   usedCountryCodes.push(currentCode);
 
@@ -92,21 +95,42 @@ function loadNextFlag() {
   }, 50);
 }
 
-// 정답 체크하는 함수
-function checkAnswer() {
-  const userAnswer = document.getElementById("answer-input").value.trim();
+// 정답 체크 함수
+function checkAnswer(isTimeout = false) {
+  clearInterval(countdownInterval); // 정답 제출하면 카운트 멈춤
+  const userInput = document.getElementById("answer-input");
+  const userAnswer = userInput.value.trim();
   const correctAnswer = countries[currentIndex].name;
   const feedback = document.getElementById("feedback");
 
   document.getElementById("submit-btn").disabled = true;
-  document.getElementById("answer-input").disabled = true;
+  userInput.disabled = true;
 
-  if (userAnswer === correctAnswer) {
+  if (!isTimeout && userAnswer === correctAnswer) {
+    // 정답일 경우
     feedback.textContent = "✅ 정답입니다!";
     feedback.style.color = "green";
     correctCount++;
   } else {
-    feedback.textContent = `❌ 정답은 ${correctAnswer}`;
+    // ❌ 오답 저장
+    if (!isTimeout) {
+      wrongAnswers.push({
+        flag: countries[currentIndex].code,
+        answer: countries[currentIndex].name,
+        user: userAnswer
+      });
+    } else {
+      wrongAnswers.push({
+        flag: countries[currentIndex].code,
+        answer: countries[currentIndex].name,
+        user: "(미응답)"
+      });
+    }
+  
+    // 피드백
+    feedback.textContent = isTimeout
+      ? `⏱️ 시간 초과! 정답은 ${correctAnswer}`
+      : `❌ 정답은 ${correctAnswer}`;
     feedback.style.color = "red";
     wrongCount++;
   }
@@ -115,9 +139,9 @@ function checkAnswer() {
   document.getElementById("correct-count").textContent = correctCount;
   document.getElementById("wrong-count").textContent = wrongCount;
 
-  answeredQuestions++; // 정답 제출 문제 수 증가
+  answeredQuestions++;
 
-  setTimeout(loadNextFlag, 1500); // 문제를 맞추면 자동으로 다음 문제로 넘어감
+  setTimeout(loadNextFlag, 1500);
 }
 
 // 버튼 클릭 이벤트
@@ -127,11 +151,20 @@ document.getElementById("submit-btn").addEventListener("click", () => {
 
   // 나머지 정답 확인 로직 (정답 체크, 점수 증가 등)
 });
+const submitBtn = document.getElementById("submit-btn");
+const inputBox = document.getElementById("answer-input");
 
-// 엔터 키로 제출
-document.getElementById("answer-input").addEventListener("keydown", (e) => {
-  const isButtonEnabled = !document.getElementById("submit-btn").disabled;
+// ✅ Enter 키로 제출
+inputBox.addEventListener("keydown", (e) => {
+  const isButtonEnabled = !submitBtn.disabled;
   if (e.key === "Enter" && isButtonEnabled) {
+    checkAnswer();
+  }
+});
+
+// ✅ 마우스 클릭 or 스마트폰 터치
+submitBtn.addEventListener("click", () => {
+  if (!submitBtn.disabled) {
     checkAnswer();
   }
 });
@@ -146,26 +179,32 @@ input.addEventListener("input", () => {
 });
 
 document.getElementById("retry-btn").addEventListener("click", () => {
-  // 1. 점수 초기화
+  // 점수, 상태 초기화
   correctCount = 0;
   wrongCount = 0;
+  answeredQuestions = 0;
+  currentCode = null;
+  usedCountryCodes = [];
+  wrongAnswers.length = 0;
+
+  // 화면 초기화
   document.getElementById("correct-count").textContent = 0;
   document.getElementById("wrong-count").textContent = 0;
-
-  // 2. 게임 상태 초기화
-  usedCountryCodes = [];
-  answeredQuestions = 0;
-
-  // 3. 화면 리셋
-  document.getElementById("end-buttons").style.display = "none";  // 종료버튼 숨김
   document.getElementById("answer-input").value = "";
-  document.getElementById("question").textContent = "이 국기는 어느 나라일까요?";
+  document.getElementById("feedback").textContent = "";
+
   document.getElementById("answer-input").style.display = "inline-block";
   document.getElementById("submit-btn").style.display = "inline-block";
   document.getElementById("feedback").style.display = "block";
-  document.getElementById("feedback").textContent = "";
+  document.getElementById("end-buttons").style.display = "none";
+  document.getElementById("countdown-bar").style.display = "block";
+  document.getElementById("wrong-questions").style.display = "none";
 
-  // 4. 다음 문제 로딩
+  // 카운트 블럭 초기화
+  document.querySelectorAll('.count-block').forEach(block => {
+    block.style.backgroundColor = '#90ee90'; // 초기 연두색
+  });
+  // 다음 문제 로딩
   loadNextFlag();
 });
 
@@ -182,3 +221,68 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("answer-input").focus();
   });
 });
+
+let index = 0;
+let countdownInterval; // startCountdown 함수 밖!
+
+function startCountdown() {
+  index = 0;
+  clearInterval(countdownInterval);
+
+  const blocks = document.querySelectorAll('.count-block');
+
+  // 초기화
+  blocks.forEach(block => {
+    block.style.backgroundColor = '#90ee90';
+  });
+
+  countdownInterval = setInterval(() => {
+    if (index < blocks.length) {
+      blocks[index].style.backgroundColor = '#ffffff';
+      index++;
+    } else {
+      clearInterval(countdownInterval);
+
+      // 5초 지나도 아직 제출 안 했으면 자동 오답 처리
+      const isDisabled = document.getElementById("submit-btn").disabled;
+      if (!isDisabled) {
+        checkAnswer(true); // 시간 초과 오답 처리
+      }
+    }
+  }, 1000);
+}
+
+function showWrongAnswers() {
+  const container = document.getElementById("wrong-questions");
+
+  if (container.style.display === "block") {
+    container.style.display = "none";
+    return;
+  }
+
+  container.innerHTML = "";
+
+  if (wrongAnswers.length === 0) {
+    container.innerHTML = "<p>틀린 문제가 없습니다!</p>";
+  } else {
+    wrongAnswers.forEach((item, idx) => {
+      container.innerHTML += `
+        <div class="wrong-item">
+          <img src="https://flagcdn.com/w80/${item.flag}.png" alt="flag" />
+          <div class="wrong-text">
+            <strong>${idx + 1}. 정답:</strong> ${item.answer} |
+            <strong>내 답:</strong> ${item.user}
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  container.style.display = "block";
+
+  // ✅ 자동 스크롤 이동
+  container.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+// ✅ 이제 addEventListener 실행
+document.getElementById("incorrect-btn").addEventListener("click", showWrongAnswers);
