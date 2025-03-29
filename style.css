@@ -117,11 +117,9 @@ body {
 /* 반응형 설정 */
 @media (max-width: 767px) {
   #start-title {
-    font-size: 36px; /* 글자 크기를 화면 너비의 6%로 설정 */
-    top: 12px; /* 화면 높이에 비례하여 상단 여백 조정 */
-    padding: 5px 5px; /* padding을 화면 크기에 맞게 설정 */
+    font-size: 1rem;  /* 화면 너비가 767px 이하일 경우, 폰트 크기를 24px로 설정 */
+    margin-top: -30vh;  /* 화면 크기에 맞춰 상단 여백도 수정 */
   }
-
   .container {
     max-width: 90vw;          /* 화면 너비의 90% */
     width: 90vw;              /* 화면 너비의 90% */
@@ -149,21 +147,22 @@ body {
 
 /* 기본 설정 */
 #start-title {
-  font-size: 2vw; /* 글자 크기를 화면 너비의 5%로 설정 */
-  padding: 1vh 0vw; /* padding을 화면 크기에 비례하도록 설정 */
+  font-size: 3rem; /* 글자 크기를 화면 너비의 5%로 설정 */
+  padding: 10px 10px; /* padding을 화면 크기에 비례하도록 설정 */
   text-align: center;
   color: #2b6edc;
   margin: 0; /* 마진을 0으로 설정 */
   word-break: break-word;
   white-space: normal;
   position: fixed;
-  top: 5vh; /* 상단 여백을 화면 높이의 5%로 설정 */
-  left: 50%; /* 화면 가로 중앙 */
-  transform: translateX(-50%); /* 가로 중앙 정렬 */
-  background-color: rgb(255, 255, 255);
+  top: 50%; /* 화면의 세로 중간 */
+  left: 50%; /* 화면의 가로 중간 */
+  transform: translate(-50%, -50%); /* 요소의 중심을 기준으로 정확히 중앙에 위치시키기 위한 보정 */
+  background-color: rgba(255, 255, 255, 0);
+  background-position: center;
   z-index: 1000;
+  margin-top: -40vh; /* 상단 여백을 화면 높이의 10% 만큼 추가하여 위로 이동 */
 }
-
 
 h2 {
   font-size: 24px;
