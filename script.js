@@ -12,13 +12,18 @@ const adjustOrbitSize = () => {
   const windowWidth = window.innerWidth;
   const windowHeight = window.innerHeight;
 
-  // 궤도의 반지름을 화면 크기 비율에 맞게 조정 (최소 150px, 최대 300px)
-  const radius = Math.min(windowWidth, windowHeight) * 0.3;  // 화면 너비/높이에 비례하여 반지름 설정
+  const radius = Math.min(windowWidth, windowHeight) * 0.3; // 반지름
 
-  // 기존에 있는 flag 요소들을 모두 제거
+  // 기존 orbit 내용 초기화
   orbit.innerHTML = "";
 
-  // flagCodes 배열을 기반으로 회전하는 국기들 추가
+  // orbit 요소의 중심 계산
+  const orbitWidth = orbit.offsetWidth;
+  const orbitHeight = orbit.offsetHeight;
+  const centerX = orbitWidth / 2;
+  const centerY = orbitHeight / 2;
+
+  // 회전 국기 배치
   flagCodes.forEach((code, index) => {
     const angle = (2 * Math.PI / flagCodes.length) * index;
 
@@ -26,40 +31,35 @@ const adjustOrbitSize = () => {
     flagEl.className = "flag";
 
     const img = document.createElement("img");
-    img.src = `https://flagcdn.com/w320/${code}.png`; // API 경로
+    img.src = `https://flagcdn.com/w320/${code}.png`;
     img.alt = code.toUpperCase();
+    img.style.objectFit = "cover";
 
     flagEl.appendChild(img);
 
-    // 회전할 각도와 함께 국기 위치 조정
-    const x = Math.cos(angle) * radius;
-    const y = Math.sin(angle) * radius;
-    flagEl.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
+    const flagSize = Math.min(50, radius / 5);
 
-    orbit.appendChild(flagEl);
+    const x = centerX + Math.cos(angle) * radius;
+    const y = centerY + Math.sin(angle) * radius;
 
-    // 반응형 크기 조정
-    const flagSize = Math.min(50, radius / 5);  // 반지름에 비례하여 국기 크기 조정
-    img.style.width = `${flagSize}px`;  // 국기 크기 설정
-    img.style.height = `${flagSize}px`; // 국기 크기 설정
-
-    // 국기를 원 모양으로 만들기
+    flagEl.style.left = `${x}px`;
+    flagEl.style.top = `${y}px`;
     flagEl.style.width = `${flagSize}px`;
     flagEl.style.height = `${flagSize}px`;
-    flagEl.style.borderRadius = "50%";  // 원형으로 만들기
-    flagEl.style.overflow = "hidden";   // 국기 이미지를 원에 맞게 잘라내기
+
+    img.style.width = "100%";
+    img.style.height = "100%";
+
+    flagEl.style.borderRadius = "50%";
+    flagEl.style.overflow = "hidden";
+
+    orbit.appendChild(flagEl);
   });
 };
 
-// 화면 크기가 변경될 때마다 호출
-window.addEventListener('resize', adjustOrbitSize);
-
-// 최초 실행
-adjustOrbitSize();
-
 const countries = [
   { code: "kr", name: "대한민국" },
-  //{ code: "jp", name: "일본" },
+  { code: "jp", name: "일본" },
   //{ code: "us", name: "미국" },
   //{ code: "fr", name: "프랑스" },
   //{ code: "de", name: "독일" },
@@ -88,6 +88,8 @@ function loadNextFlag() {
     document.getElementById("feedback").style.display = "none";
     document.getElementById("countdown-bar").style.display = "none";
     document.getElementById("end-buttons").style.display = "block";
+    returnToStartScreen()
+
 
     return;
   }
@@ -173,13 +175,6 @@ function checkAnswer(isTimeout = false) {
   setTimeout(loadNextFlag, 1500);
 }
 
-// 버튼 클릭 이벤트
-document.getElementById("submit-btn").addEventListener("click", () => {
-  // ✅ 입력창 너비 초기화
-  input.style.width = initialWidth;
-
-  // 나머지 정답 확인 로직 (정답 체크, 점수 증가 등)
-});
 const submitBtn = document.getElementById("submit-btn");
 const inputBox = document.getElementById("answer-input");
 
@@ -198,14 +193,6 @@ submitBtn.addEventListener("click", () => {
   }
 });
 
-const input = document.getElementById("answer-input");
-const initialWidth = "240px"; // 너비 초기값 (CSS에서 설정한 값과 동일하게!)
-
-input.addEventListener("input", () => {
-  const len = input.value.length;
-  const newWidth = Math.min(240 + len * 10, 320); // 원하는 최대치까지
-  input.style.width = `${newWidth}px`;
-});
 
 document.getElementById("retry-btn").addEventListener("click", () => {
   // 점수, 상태 초기화
@@ -241,16 +228,22 @@ window.addEventListener("DOMContentLoaded", () => {
   // "게임 시작하기" 버튼 클릭 시
   document.getElementById("start-btn").addEventListener("click", () => {
     // 시작 화면 숨기고 게임 화면 보이기
-    document.getElementById("start-screen").style.display = "none";
+    document.getElementById("countryGameStart-Screen").style.display = "none";
     document.getElementById("start-title").style.display = "none";
     document.getElementById("game-screen").style.display = "block";
     document.getElementById("end-buttons").style.display = "none";
+    document.body.style.overflowY = "hidden";
 
     // 첫 문제 로딩
     loadNextFlag(); // ← 여기에만 호출되게!
     document.getElementById("answer-input").focus();
   });
 });
+
+// 예: 게임 종료되거나 메인화면으로 돌아갈 때
+function returnToStartScreen() {
+  document.body.style.overflowY = "auto";
+}
 
 let index = 0;
 let countdownInterval; // startCountdown 함수 밖!
@@ -291,6 +284,7 @@ function showWrongAnswers() {
   }
 
   container.innerHTML = "";
+  document.body.style.overflowY = "auto";
 
   if (wrongAnswers.length === 0) {
     container.innerHTML = "<p>틀린 문제가 없습니다!</p>";
@@ -316,3 +310,5 @@ function showWrongAnswers() {
 
 // ✅ 이제 addEventListener 실행
 document.getElementById("incorrect-btn").addEventListener("click", showWrongAnswers);
+window.addEventListener("load", adjustOrbitSize);
+window.addEventListener("resize", adjustOrbitSize); // 반응형 유지
