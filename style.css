@@ -56,7 +56,7 @@ body {
 }
 
 /* 게임 시작 버튼 */
-#start-btn {
+#LevelSelectBtn {
   padding: clamp(8px, 2vw, 10px) clamp(16px, 5vw, 20px);
   font-size: clamp(14px, 3vw, 16px);
   background: linear-gradient(135deg, #4f9deb, #2b6edc);
@@ -66,12 +66,12 @@ body {
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
-  margin-top: clamp(16px, 20vh, 160px);    /* 더 넓게 여백 조정 */
-  margin-bottom: clamp(8px, 2vh, 20px);  /* 아래 여백 */
+  margin-top: clamp(16px, 20vh, 160px); /* 더 넓게 여백 조정 */
+  margin-bottom: clamp(8px, 2vh, 20px); /* 아래 여백 */
   z-index: 2;
 }
 
-.start-button:hover {
+#LevelSelectBtn:hover {
   background: linear-gradient(135deg, #2b6edc, #1a4fbf);
   transform: translateY(-10px); /* 🔥 살짝 위로만 이동 */
   box-shadow: 0 6px 14px rgba(0, 123, 255, 0.3);
@@ -279,5 +279,110 @@ h2 {
 @media (max-width: 480px){
   .wrong-text {
     font-size: 10px;
+  }
+}
+
+
+/* 전체 레벨 선택 컨테이너 */
+.level-container {
+  display: flex;
+  flex-direction: column;  /* Stack title and box vertically */
+}
+
+
+/* 제목 */
+.level-title {
+  width: 70vw;
+  max-width: 400px;
+  font-size: 33px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;  /* 더 간격을 줄여서 제목과 박스 간격을 조정 */
+  border-radius: 10px;
+  color: #2b6edc;
+  background-color: #e6f2ff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+  /* 중앙 정렬을 위한 마진 추가 */
+  margin: auto;
+  margin-top: 200px; /* 더 많은 위쪽 여백을 추가 */
+}
+
+/* 각 레벨 선택 박스 */
+.level-box {
+  width: 70vw;
+  height: 20vh;
+  max-width: 400px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto; /* 제목과 박스를 중앙 정렬하고, 간격 추가 */
+  margin-top: 30px; /* 더 많은 위쪽 여백을 추가 */
+}
+
+/* 버튼들 가로 배치 */
+.level-buttons {
+  display: flex;
+  width: 90%;
+  gap: 12px;
+}
+
+/* 버튼 스타일 */
+.level-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4f9deb;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  width: 30%;
+  text-align: center;
+}
+
+.level-button:hover {
+  background-color: #1a4fbf;
+}
+
+/* 설명 박스 3열 배치 */
+.level-description {
+  display: flex;
+  width: 90%;
+  margin-top: 20px;
+  gap: 12px;
+}
+
+/* 설명 박스 스타일 */
+.level-explanation {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4f9deb6b;
+  color: #333;
+  border-radius: 8px;
+  border: none;
+  width: 19%;
+  text-align: center;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .level-box{
+    height: 20vh;
+  }
+  .title{
+    font-size: 22px;
+  }
+  .level-button {
+    padding: 10px 4px;
+    font-size: 12px;
+  }
+
+  .level-explanation {
+    padding: 10px 4px;
+    font-size: 12px;
+    width: 100%;
   }
 }
