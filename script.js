@@ -80,7 +80,7 @@ const countries = [
   { code: "nl", name: "네덜란드" },
   { code: "se", name: "스웨덴" },
   { code: "pl", name: "폴란드" },
-  { code: "bel", name: "벨기에" },
+  { code: "be", name: "벨기에" },
   { code: "no", name: "노르웨이" },
   { code: "at", name: "오스트리아" },
   { code: "ch", name: "스위스" },
@@ -114,10 +114,7 @@ const countries = [
   { code: "bd", name: "방글라데시" },
   { code: "cl", name: "칠레" },
   { code: "by", name: "벨라루스" },
-  { code: "pk", name: "파키스탄" },
-  { code: "eg", name: "이집트" },
   { code: "ng", name: "나이지리아" },
-  { code: "col", name: "콜롬비아" },
   { code: "ke", name: "케냐" },
   { code: "ph", name: "필리핀" },
   { code: "pk", name: "파키스탄" },
@@ -430,9 +427,9 @@ function startGame() {
 
   totalQuestions = CurrentNum;
   if(totalQuestions == 0) totalQuestions = 10;
-  if(CurrentLevel == "쉬움"){
-    document.getElementById("GameClass_Hard").style.display = "none";
-  }
+  //if(CurrentLevel == "쉬움"){
+  //  document.getElementById("GameClass_Hard").style.display = "none";
+  //}
   ReStartGame();
 }
 
