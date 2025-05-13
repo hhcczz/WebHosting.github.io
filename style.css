@@ -56,7 +56,7 @@ body {
 }
 
 /* 게임 시작 버튼 */
-#LevelSelectBtn {
+.start-button {
   padding: clamp(8px, 2vw, 10px) clamp(16px, 5vw, 20px);
   font-size: clamp(14px, 3vw, 16px);
   background: linear-gradient(135deg, #4f9deb, #2b6edc);
@@ -69,9 +69,14 @@ body {
   margin-top: clamp(16px, 20vh, 160px); /* 더 넓게 여백 조정 */
   margin-bottom: clamp(8px, 2vh, 20px); /* 아래 여백 */
   z-index: 2;
+  
+  /* x값을 중앙 정렬 */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-#LevelSelectBtn:hover {
+.start-button:hover {
   background: linear-gradient(135deg, #2b6edc, #1a4fbf);
   transform: translateY(-10px); /* 🔥 살짝 위로만 이동 */
   box-shadow: 0 6px 14px rgba(0, 123, 255, 0.3);
@@ -90,6 +95,21 @@ body {
   padding-top: 5px; /* ✅ 컨테이너 내부 위쪽 여백 추가 */
 }
 
+/* 홈 버튼 스타일 */
+.home-btn {
+  position: absolute;
+  top: 10px; /* 상단에서 10px 거리 */
+  left: 10px; /* 좌측에서 10px 거리 */
+  width: 40px; /* 이미지 크기 */
+  height: 40px; /* 이미지 크기 */
+  cursor: pointer;
+  z-index: 10; /* 다른 요소보다 위에 위치 */
+}
+
+/* 버튼에 호버 효과 */
+.home-btn:hover {
+  opacity: 0.8;
+}
 
 /* 카운트다운 */
 #countdown-bar {
@@ -289,7 +309,9 @@ h2 {
   flex-direction: column;  /* Stack title and box vertically */
 }
 
-
+.Level-radio {
+  display: none; /* 라디오 버튼 숨기기 */
+}
 /* 제목 */
 .level-title {
   width: 70vw;
@@ -311,7 +333,7 @@ h2 {
 /* 각 레벨 선택 박스 */
 .level-box {
   width: 70vw;
-  height: 20vh;
+  height: 30vh;
   max-width: 400px;
   background-color: white;
   border-radius: 10px;
@@ -325,53 +347,37 @@ h2 {
 }
 
 /* 버튼들 가로 배치 */
-.level-buttons {
+.LevelSelectInBoxStyle {
   display: flex;
+  margin: 10px;
   width: 90%;
   gap: 12px;
 }
 
 /* 버튼 스타일 */
-.level-button {
+.Level-DESC {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #4f9deb;
-  color: white;
+  background-color: #4f9deb6b;
+  color: rgb(30, 30, 30);
   border-radius: 8px;
   border: none;
   width: 30%;
   text-align: center;
 }
 
-.level-button:hover {
+.Level-DESC:hover {
   background-color: #1a4fbf;
 }
 
-/* 설명 박스 3열 배치 */
-.level-description {
-  display: flex;
-  width: 90%;
-  margin-top: 20px;
-  gap: 12px;
-}
-
-/* 설명 박스 스타일 */
-.level-explanation {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #4f9deb6b;
-  color: #333;
-  border-radius: 8px;
-  border: none;
-  width: 19%;
-  text-align: center;
+/* 라디오 버튼이 선택되었을 때 스타일 변경 */
+.Level-radio:checked + .Level-DESC {
+  background-color: #1a4fbf;  /* 선택된 버튼 색상 */
+  color: white;  /* 텍스트 색상 */
 }
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
-  .level-box{
-    height: 20vh;
-  }
   .title{
     font-size: 22px;
   }
@@ -379,8 +385,10 @@ h2 {
     padding: 10px 4px;
     font-size: 12px;
   }
-
-  .level-explanation {
+  .level-title{
+    font-size: 20px;
+  }
+  .Level-DESC {
     padding: 10px 4px;
     font-size: 12px;
     width: 100%;
