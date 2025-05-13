@@ -19,21 +19,45 @@
   <div class="level-container" style="display: none;">
     <div class="level-title">난이도 선택</div>
     <div class="level-box">
-      <div class="level-buttons">
-        <button id = "Easy-Level" class="level-button">쉬움</button>
-        <button id = "Normal-Level" class="level-button">보통</button>
-        <button id = "Hard-Level" class="level-button">어려움</button>
+      <div class="LevelSelectInBoxStyle">
+        <input type="radio" id="Easy-Level" name="level" class="Level-radio"  />
+        <label for="Easy-Level" class="Level-DESC">쉬움</label>
+
+        <input type="radio" id="Normal-Level" name="level" class="Level-radio" />
+        <label for="Normal-Level" class="Level-DESC">보통</label>
+
+        <input type="radio" id="Hard-Level" name="level" class="Level-radio" />
+        <label for="Hard-Level" class="Level-DESC">어려움</label>
       </div>
-      <div class="level-description">
-        <div class="level-explanation">30개</div>
-        <div class="level-explanation">60개</div>
-        <div class="level-explanation">100개</div>
+
+      <div class="LevelSelectInBoxStyle">
+        <input type="radio" id="Question_Num-10" name="question-num" class="Level-radio" />
+        <label for="Question_Num-10" class="Level-DESC">10개</label>
+      
+        <input type="radio" id="Question_Num-20" name="question-num" class="Level-radio" />
+        <label for="Question_Num-20" class="Level-DESC">20개</label>
+      
+        <input type="radio" id="Question_Num-30" name="question-num" class="Level-radio" />
+        <label for="Question_Num-30" class="Level-DESC">30개</label>
+      </div>
+
+      <div class="LevelSelectInBoxStyle">
+        <input type="radio" id="Question_Num-50" name="question-num" class="Level-radio" />
+        <label for="Question_Num-50" class="Level-DESC">50개</label>
+      
+        <input type="radio" id="Question_Num-70" name="question-num" class="Level-radio" />
+        <label for="Question_Num-70" class="Level-DESC">70개</label>
+      
+        <input type="radio" id="Question_Num-100" name="question-num" class="Level-radio" />
+        <label for="Question_Num-100" class="Level-DESC">100개</label>
       </div>
     </div>
+    <button id="GameStartBtn" class="start-button">게임 시작하기</button>
   </div>
 
   <!-- 게임 화면 -->
   <div id="game-screen" class="container" style="display: none; text-align: center;">
+    <img id="home-btn" src="C:\Users\qimin\OneDrive\바탕 화면\python\Guess the name of the flag\cache\home.png" alt="Home Button" class="home-btn" />
     <div id="countdown-bar">
       <div class="count-block"></div>
       <div class="count-block"></div>
@@ -44,9 +68,11 @@
     <h2>🌍 국기 맞추기 게임</h2>
     <img id="flag-image" src="" alt="국기 이미지" />
     <p id="question" class="question">이 국기는 어느 나라일까요?</p>
-    <div class="input-wrapper">
-      <input id="answer-input" type="text" placeholder="나라 이름을 입력하세요" />
-      <button id="submit-btn">정답 확인</button>
+    <div id ="GameClass_Hard">
+      <div class="input-wrapper">
+        <input id="answer-input" type="text" placeholder="나라 이름을 입력하세요" />
+        <button id="submit-btn">정답 확인</button>
+      </div>
     </div>
     <!-- ✅ 여기에 정답/오답 카운트 표시 -->
     <p id="feedback"></p>
@@ -63,8 +89,7 @@
   <!-- 오답노트 표시 영역 -->
   <div id="wrong-questions" style="display: none;"></div>
   
-
 </body>
-<script src="script.js"></script>
+<script src="main.js"></script>  <!-- main.js 불러오기 -->
 </html>
 
