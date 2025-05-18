@@ -580,9 +580,17 @@ function startCountdown() {
     } else {
       clearInterval(countdownInterval);
 
+      let isDisabled = false;
       // 5초 지나도 아직 제출 안 했으면 자동 오답 처리
-      const isDisabled = document.getElementById("submit-btn").disabled;
+      if (ThisPlayingGameLevel === "어려움") {
+        isDisabled = document.getElementById("submit-btn").disabled;
+      }
       if (!isDisabled) {
+        if(ThisPlayingGameLevel === "쉬움"){
+          document.getElementById("EasyCorrectBtn1").classList.add("disabled-btn");
+          document.getElementById("EasyCorrectBtn2").classList.add("disabled-btn");
+          document.getElementById("EasyCorrectBtn3").classList.add("disabled-btn");
+        }
         checkAnswer(true); // 시간 초과 오답 처리
       }
     }
