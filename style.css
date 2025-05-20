@@ -142,11 +142,19 @@ body {
 h2 {
   font-size: clamp(8px, 6vw, 24px); /* 최소 24px ~ 최대 48px, 화면 너비에 비례 */
 }
+.flag-container {
+  width: clamp(180px, 20vw, 320px); /* 화면 크기에 맞게 너비 조정 */
+  aspect-ratio: 4 / 3; /* 비율 고정 */
+  overflow: hidden; /* 이미지가 벗어나지 않도록 설정 */
+}
+
 #flag-image {
-  width: clamp(180px, 20vw, 320px); /* 화면 크기에 맞게 너비 조정 (최소 80px ~ 최대 150px) */
-  height: auto; /* 높이는 비율에 맞게 자동으로 조정 */
+  width: 33%;
+  height: 33%;
   border: 2px solid #0000000f;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  object-fit: cover; /* 비율 유지하면서 크기 맞추기 */
 }
 
 .question {
@@ -269,7 +277,28 @@ h2 {
   
 }
 
-#answer-input {
+/*#Initial_Box{
+  width: 33%;
+  height: 50%;
+  padding: 4px 4px;
+  border-radius: 8px;
+  background-color: #903939;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  justify-content: center;
+}*/
+
+#ShowInitial{
+  font-weight: bold;
+  font-size: 24px;
+}
+@media (max-width: 480px){
+  #ShowInitial {
+    font-size: 12px;
+  }
+}
+
+.AnswerInputStyle {
   flex: 1;
   padding: clamp(8px, 2vw, 12px) clamp(10px, 4vw, 16px);  /* 상하, 좌우 패딩 반응형 */
   font-size: clamp(12px, 3vw, 16px);                       /* 글씨 크기 반응형 */
@@ -285,7 +314,7 @@ h2 {
 #feedback {
   font-size: clamp(10px, 2vw, 18px); /* 최소 24px ~ 최대 48px, 화면 너비에 비례 */
 }
-#submit-btn{
+.submit-btn{
   padding: 10px 8px;
   font-size: 14px;
   background: #f5f5f5;
@@ -295,7 +324,7 @@ h2 {
   transition: all 0.2s;
 }
 @media (max-width: 480px){
-  #submit-btn {
+  .submit-btn {
     width: 100%;  /* 버튼 너비를 100%로 */
     font-size: 10px;
   }
@@ -413,9 +442,7 @@ h2 {
   text-align: center;
   margin-bottom: 20px;  /* 더 간격을 줄여서 제목과 박스 간격을 조정 */
   border-radius: 10px;
-  color: #2b6edc;
-  background-color: #e6f2ff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #000000;
   
   /* 중앙 정렬을 위한 마진 추가 */
   margin: auto;
@@ -478,7 +505,7 @@ h2 {
     font-size: 12px;
   }
   .level-title{
-    font-size: 20px;
+    font-size: 18px;
   }
   .Level-DESC {
     padding: 10px 4px;
