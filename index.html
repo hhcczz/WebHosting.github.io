@@ -17,7 +17,7 @@
   </div>
 
   <div class="level-container" style="display: none;">
-    <div class="level-title">난이도 선택</div>
+    <div class="level-title">⭐️ 난이도 선택</div>
     <div class="level-box">
       <div class="LevelSelectInBoxStyle">
         <input type="radio" id="Easy-Level" name="level" class="Level-radio"  />
@@ -66,7 +66,9 @@
       <div class="count-block"></div>
     </div>
     <h2>🌍 국기 맞추기 게임</h2>
-    <img id="flag-image" src="" alt="국기 이미지" />
+    <div id="flag-container">
+      <img id="flag-image" src="" alt="국기 이미지" />
+    </div>
     <p id="question" class="question">이 국기는 어느 나라일까요?</p>
     <div id ="GameClass_Easy">
       <div class="button-box">
@@ -75,10 +77,19 @@
         <button id = "EasyCorrectBtn3" class="EasyCorrectBtn">프랑스</button>
       </div>
     </div>
+    <div id ="GameClass_Normal">
+        <div id = "Initial_Box">
+          <p id = "ShowInitial">ㄱㄴㄷㄹ</p>
+        </div>
+      <div class="input-wrapper">
+        <input id="N_answer-input" class = "AnswerInputStyle" type="text" placeholder="나라 이름을 입력하세요" />
+        <button id="N_submit-btn" class = "submit-btn">정답 확인</button>
+      </div>
+    </div>
     <div id ="GameClass_Hard">
       <div class="input-wrapper">
-        <input id="answer-input" type="text" placeholder="나라 이름을 입력하세요" />
-        <button id="submit-btn">정답 확인</button>
+        <input id="H_answer-input" class = "AnswerInputStyle" type="text" placeholder="나라 이름을 입력하세요" />
+        <button id="H_submit-btn" class = "submit-btn">정답 확인</button>
       </div>
     </div>
     <!-- ✅ 여기에 정답/오답 카운트 표시 -->
