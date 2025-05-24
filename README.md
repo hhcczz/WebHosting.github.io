@@ -87,6 +87,11 @@
 
 <br>
 
- ## ▶️ 소개 영상
+## 🕹️ 게임 플레이
++ **[플레이](https://hhcczz.github.io/WebHosting.github.io/)**
+
+<br>
+
+## ▶️ 소개 영상
 <!--+ [게임 소개 영상](https://youtu.be/xxx)
 !-->
