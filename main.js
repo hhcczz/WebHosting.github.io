@@ -145,4 +145,8 @@ window.addEventListener("load", () => {
   if (orbit) adjustOrbitSize(orbit);
 });
 
+window.addEventListener("resize", () => {
+  const orbit = document.getElementById("orbit");
+  if (orbit) adjustOrbitSize(orbit);
+});
 
