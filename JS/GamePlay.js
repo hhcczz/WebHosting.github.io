@@ -51,9 +51,6 @@ function loadNextFlag() {
 
   // 선택된 국가 정보 저장
   GameData.currentIndex = GameData.randomIndex;
-  
-  console.log(countries[GameData.randomIndex].code); // "kr"
-  console.log(countries[GameData.randomIndex].name); // "대한민국"
 
   const correctName = countries[GameData.randomIndex].name;
 
