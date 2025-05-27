@@ -1,0 +1,45 @@
+<img id="home-btn" src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="Home Button" class="home-btn" />
+<div id="countdown-bar">
+  <div class="count-block"></div>
+  <div class="count-block"></div>
+  <div class="count-block"></div>
+  <div class="count-block"></div>
+  <div class="count-block"></div>
+</div>
+<h2>🌍 국기 맞추기 게임</h2>
+<div id="flag-container">
+  <img id="flag-image" src="" alt="국기 이미지">
+</div>
+<p id="question" class="question">이 국기는 어느 나라일까요?</p>
+<div id ="GameClass_Easy">
+  <div class="button-box">
+    <button id = "EasyCorrectBtn1" class="EasyCorrectBtn">북마리아나 제도</button>
+    <button id = "EasyCorrectBtn2" class="EasyCorrectBtn">차드</button>
+    <button id = "EasyCorrectBtn3" class="EasyCorrectBtn">프랑스</button>
+  </div>
+</div>
+<div id ="GameClass_Normal">
+    <div id = "Initial_Box">
+      <p id = "ShowInitial">ㄱㄴㄷㄹ</p>
+    </div>
+  <div class="input-wrapper">
+    <input class = "AnswerInputStyle" type="text" placeholder="나라 이름을 입력하세요" />
+    <button class = "submit-btn">정답 확인</button>
+  </div>
+</div>
+<div id ="GameClass_Hard">
+  <div class="input-wrapper">
+    <input class = "AnswerInputStyle" type="text" placeholder="나라 이름을 입력하세요" />
+    <button class = "submit-btn">정답 확인</button>
+  </div>
+</div>
+<!-- ✅ 여기에 정답/오답 카운트 표시 -->
+<p id="feedback"></p>
+<div class="score-container">
+  <div class="score-box">맞춘 문제: <span id="correct-count">0</span></div>
+  <div class="score-box">틀린 문제: <span id="wrong-count">0</span></div>
+</div>
+<div id="end-buttons" style="display: none;">
+  <button id="retry-btn" class="end-button">다시 하기</button>
+  <button id="incorrect-btn" class="end-button">오답 노트</button>
+</div>
