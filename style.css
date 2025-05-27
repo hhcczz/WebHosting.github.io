@@ -52,7 +52,6 @@ body {
 
 .flag {
   position: absolute;
-  transform: translate(-50%, -50%);
 }
 
 /* 게임 시작 버튼 */
@@ -425,7 +424,7 @@ h2 {
 
 
 /* 전체 레벨 선택 컨테이너 */
-.level-container {
+#level-container {
   display: flex;
   flex-direction: column;  /* Stack title and box vertically */
 }
@@ -446,7 +445,7 @@ h2 {
   
   /* 중앙 정렬을 위한 마진 추가 */
   margin: auto;
-  margin-top: 200px; /* 더 많은 위쪽 여백을 추가 */
+  margin-top: 27vh; /* 더 많은 위쪽 여백을 추가 */
 }
 
 /* 각 레벨 선택 박스 */
