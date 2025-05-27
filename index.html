@@ -1,113 +1,22 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🌍 국기 맞추기 게임</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- 시작화면  -->
-  <div id="countryGameStart-Screen" class="orbit-container">
-    <h1 id="start-title">🌍 국기 맞추기 게임</h1>
-    <div class="planet">
-      <div class="orbit" id="orbit"></div>
-    </div>
-    <button id="LevelSelectBtn" class="start-button">게임 시작하기</button>
-  </div>
-
-  <div class="level-container" style="display: none;">
-    <div class="level-title">⭐️ 난이도 선택</div>
-    <div class="level-box">
-      <div class="LevelSelectInBoxStyle">
-        <input type="radio" id="Easy-Level" name="level" class="Level-radio"  />
-        <label for="Easy-Level" class="Level-DESC">쉬움</label>
-
-        <input type="radio" id="Normal-Level" name="level" class="Level-radio" />
-        <label for="Normal-Level" class="Level-DESC">보통</label>
-
-        <input type="radio" id="Hard-Level" name="level" class="Level-radio" />
-        <label for="Hard-Level" class="Level-DESC">어려움</label>
-      </div>
-
-      <div class="LevelSelectInBoxStyle">
-        <input type="radio" id="Question_Num-10" name="question-num" class="Level-radio" />
-        <label for="Question_Num-10" class="Level-DESC">10개</label>
-      
-        <input type="radio" id="Question_Num-20" name="question-num" class="Level-radio" />
-        <label for="Question_Num-20" class="Level-DESC">20개</label>
-      
-        <input type="radio" id="Question_Num-30" name="question-num" class="Level-radio" />
-        <label for="Question_Num-30" class="Level-DESC">30개</label>
-      </div>
-
-      <div class="LevelSelectInBoxStyle">
-        <input type="radio" id="Question_Num-50" name="question-num" class="Level-radio" />
-        <label for="Question_Num-50" class="Level-DESC">50개</label>
-      
-        <input type="radio" id="Question_Num-70" name="question-num" class="Level-radio" />
-        <label for="Question_Num-70" class="Level-DESC">70개</label>
-      
-        <input type="radio" id="Question_Num-100" name="question-num" class="Level-radio" />
-        <label for="Question_Num-100" class="Level-DESC">100개</label>
-      </div>
-    </div>
-    <button id="GameStartBtn" class="start-button">게임 시작하기</button>
-  </div>
-
+  <!-- 시작 화면  -->
+  <div id = "orbit-container"></div>
+  <!-- 레벨 선택 화면 -->
+  <div id = "level-container" style="display: none;"></div>
   <!-- 게임 화면 -->
-  <div id="game-screen" class="container" style="display: none; text-align: center;">
-    <img id="home-btn" src="C:\Users\qimin\OneDrive\바탕 화면\python\Guess the name of the flag\cache\home.png" alt="Home Button" class="home-btn" />
-    <div id="countdown-bar">
-      <div class="count-block"></div>
-      <div class="count-block"></div>
-      <div class="count-block"></div>
-      <div class="count-block"></div>
-      <div class="count-block"></div>
-    </div>
-    <h2>🌍 국기 맞추기 게임</h2>
-    <div id="flag-container">
-      <img id="flag-image" src="" alt="국기 이미지" />
-    </div>
-    <p id="question" class="question">이 국기는 어느 나라일까요?</p>
-    <div id ="GameClass_Easy">
-      <div class="button-box">
-        <button id = "EasyCorrectBtn1" class="EasyCorrectBtn">북마리아나 제도</button>
-        <button id = "EasyCorrectBtn2" class="EasyCorrectBtn">차드</button>
-        <button id = "EasyCorrectBtn3" class="EasyCorrectBtn">프랑스</button>
-      </div>
-    </div>
-    <div id ="GameClass_Normal">
-        <div id = "Initial_Box">
-          <p id = "ShowInitial">ㄱㄴㄷㄹ</p>
-        </div>
-      <div class="input-wrapper">
-        <input id="N_answer-input" class = "AnswerInputStyle" type="text" placeholder="나라 이름을 입력하세요" />
-        <button id="N_submit-btn" class = "submit-btn">정답 확인</button>
-      </div>
-    </div>
-    <div id ="GameClass_Hard">
-      <div class="input-wrapper">
-        <input id="H_answer-input" class = "AnswerInputStyle" type="text" placeholder="나라 이름을 입력하세요" />
-        <button id="H_submit-btn" class = "submit-btn">정답 확인</button>
-      </div>
-    </div>
-    <!-- ✅ 여기에 정답/오답 카운트 표시 -->
-    <p id="feedback"></p>
-    <div class="score-container">
-      <div class="score-box">맞춘 문제: <span id="correct-count">0</span></div>
-      <div class="score-box">틀린 문제: <span id="wrong-count">0</span></div>
-    </div>
-    <div id="end-buttons" style="display: none;">
-      <button id="retry-btn" class="end-button">다시 하기</button>
-      <button id="incorrect-btn" class="end-button">오답 노트</button>
-    </div>
-  </div>
-
-  <!-- 오답노트 표시 영역 -->
+  <div id="game-screen" class="container" style="display: none; text-align: center;"></div>
+  
+  <!-- 오답 노트 -->
   <div id="wrong-questions" style="display: none;"></div>
   
 </body>
-<script src="script.js"></script>  <!-- main.js 불러오기 -->
+<script type="module" src="./script.js"></script>
 </html>
-
